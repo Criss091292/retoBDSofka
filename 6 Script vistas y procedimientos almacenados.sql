@@ -71,25 +71,18 @@ OUT respuesta BOOLEAN
 BEGIN
 DECLARE totalRegistros INT;
 SET totalRegistros = 0;
-
-UPDATE producto AS prod
-SET prod.nombre = nombre, prod.precioBase = precioBase
-WHERE prod.codigoBarras = codigoBarras;
-
+INSERT INTO producto VALUES(codigoBarras,nombre,precioBase);
 SET totalRegistros = (SELECT COUNT(prod.codigoBarras) FROM producto AS prod
 WHERE prod.codigoBarras = codigoBarras);
-
 IF (totalRegistros) <> 1 THEN
 SET respuesta = FALSE;
 ELSE
 SET respuesta = TRUE;
 END IF;
-
 SELECT respuesta;
 END$$
 
 DELIMITER ;
-
 
 
 /*sp_select_producto*/
