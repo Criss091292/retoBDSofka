@@ -1,7 +1,7 @@
 /*actualizar producto*/
 DELIMITER $$
 
-USE `CristianAyala_Supermercado_13092021`$$
+USE `CristianAyala_Supermercado_10092021`$$
 
 DROP PROCEDURE IF EXISTS `actualizar_producto`$$
 
@@ -19,8 +19,8 @@ UPDATE producto AS prod
 SET prod.nombre = nombre, prod.precioBase = precioBase
 WHERE prod.codigoBarras = codigoBarras;
 
-SET totalRegistros = (SELECT COUNT(prod.codigoBarras) FROM producto AS prod 
-WHERE prod.codigoBarras = codigoBarras); 
+SET totalRegistros = (SELECT COUNT(prod.codigoBarras) FROM producto AS prod
+WHERE prod.codigoBarras = codigoBarras);
 
 IF (totalRegistros) <> 1 THEN
 SET respuesta = FALSE;
@@ -40,7 +40,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `CristianAyala_Supermercado_13092021`$$
+USE `CristianAyala_Supermercado_10092021`$$
 
 DROP PROCEDURE IF EXISTS `sp_borrar_producto`$$
 
@@ -58,15 +58,34 @@ DELIMITER ;
 /*sp_insertar_producto*/
 DELIMITER $$
 
-USE `CristianAyala_Supermercado_13092021`$$
+USE `CristianAyala_Supermercado_10092021`$$
 
-DROP PROCEDURE IF EXISTS `sp_borrar_producto`$$
+DROP PROCEDURE IF EXISTS `sp_insertar_producto`$$
 
-CREATE DEFINER=`sofka_training`@`%` PROCEDURE `sp_borrar_producto`(
-	IN codigoBarras VARCHAR(255)
+CREATE DEFINER=`sofka_training`@`%` PROCEDURE `sp_insertar_producto`(
+IN codigoBarras VARCHAR(255),
+IN nombre VARCHAR(255),
+IN precioBase INT,
+OUT respuesta BOOLEAN
 )
 BEGIN
-	DELETE FROM producto prod WHERE prod.codigoBarras = codigoBarras;
+DECLARE totalRegistros INT;
+SET totalRegistros = 0;
+
+UPDATE producto AS prod
+SET prod.nombre = nombre, prod.precioBase = precioBase
+WHERE prod.codigoBarras = codigoBarras;
+
+SET totalRegistros = (SELECT COUNT(prod.codigoBarras) FROM producto AS prod
+WHERE prod.codigoBarras = codigoBarras);
+
+IF (totalRegistros) <> 1 THEN
+SET respuesta = FALSE;
+ELSE
+SET respuesta = TRUE;
+END IF;
+
+SELECT respuesta;
 END$$
 
 DELIMITER ;
@@ -76,38 +95,36 @@ DELIMITER ;
 /*sp_select_producto*/
 DELIMITER $$
 
-USE `CristianAyala_Supermercado_13092021`$$
+USE `CristianAyala_Supermercado_10092021`$$
 
-DROP PROCEDURE IF EXISTS `sp_borrar_producto`$$
+DROP PROCEDURE IF EXISTS `sp_select_producto`$$
 
-CREATE DEFINER=`sofka_training`@`%` PROCEDURE `sp_borrar_producto`(
+CREATE DEFINER=`sofka_training`@`%` PROCEDURE `sp_select_producto`(
 	IN codigoBarras VARCHAR(255)
 )
 BEGIN
-	DELETE FROM producto prod WHERE prod.codigoBarras = codigoBarras;
+	SELECT * FROM producto prod WHERE prod.codigoBarras = codigoBarras;
 END$$
 
 DELIMITER ;
-
-
 
 /*sp_departamento_join_cidad*/
 
 DELIMITER $$
 
-USE `CristianAyala_Supermercado_13092021`$$
+USE `CristianAyala_Supermercado_10092021`$$
 
 DROP PROCEDURE IF EXISTS `sp_departamento_join_ciudad`$$
 
 CREATE DEFINER=`sofka_training`@`%` PROCEDURE `sp_departamento_join_ciudad`()
 BEGIN
-	SELECT 
+	SELECT
 	c.idCiudad AS 'id',
 	c.nombre AS 'ciudad',
 	dep.nombre AS 'departamento'
-	FROM 
+	FROM
 		Departamento dep
-	INNER JOIN 
+	INNER JOIN
 		Ciudad c ON dep.idDomicilio = c.idDepartamento;
 END$$
 
@@ -118,16 +135,6 @@ DELIMITER ;
 
 /* vista documentosPersona */
 
-DELIMITER $$
-
-ALTER ALGORITHM=UNDEFINED DEFINER=`sofka_training`@`%` SQL SECURITY DEFINER VIEW `documentosPersona` AS 
-SELECT
-  `Documento`.`abreviatura` AS `abreviatura`,
-  `Documento`.`numeroDocumento` AS `numeroDocumento`,
-  `Persona`.`nombres`       AS `nombres`,
-  `Persona`.`apellidos`     AS `apellidos`
-FROM (`Persona`
-   JOIN `Documento`
-     ON ((`Documento`.`idPersona` = `Persona`.`idPersona`)))$$
-
-DELIMITER ;
+CREATE OR REPLACE VIEW  documentosPersona AS SELECT  Documento.`abreviatura`, Documento.`numeroDocumento`, Persona.`nombres`,Persona.`apellidos`
+   FROM Persona INNER JOIN Documento ON
+   Documento.`idPersona` = Persona.`idPersona`

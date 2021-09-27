@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate
-MySQL - 8.0.23 : Database - CristianAyala_Supermercado_13092021
+MySQL - 8.0.23 : Database - CristianAyala_Supermercado_10092021
 *********************************************************************
 */
 
@@ -11,7 +11,7 @@ MySQL - 8.0.23 : Database - CristianAyala_Supermercado_13092021
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-USE `CristianAyala_Supermercado_13092021`;
+USE `CristianAyala_Supermercado_10092021`;
 
 /*Data for the table `producto` */
 
@@ -20,7 +20,7 @@ insert  into `producto`(`codigoBarras`,`nombre`,`precioBase`) values ('ABC123','
 
 /*Data for the table `Departamento` */
 
-insert  into `Departamento`(`idDomicilio`,`nombre`) values (1,'Amazonas'),(2,'Antioquia'),(3,'Arauca'),(4,'Atlántico'),(5,'Bogotá'),(6,'Bolívar'),(7,'Boyacá'),(8,'Caldas'),(9,'Caquetá'),(10,'Casanare'),(11,'Cauca'),(12,'Cesar'),(13,'Chocó'),(14,'Córdoba'),(15,'Cundinamarca'),(16,'Guainía'),(17,'Guaviare'),(18,'Huila'),(19,'La Guajira'),(20,'Magdalena'),(21,'Meta'),(22,'Nariño'),(23,'Norte de Santander'),(24,'Putumayo'),(25,'Quindío'),(26,'Risaralda'),(27,'San Andrés y Providencia'),(28,'Santander'),(29,'Sucre'),(30,'Tolima'),(31,'Valle del Cauca'),(32,'Vaupés'),(33,'Vichada');
+insert  into `Departamento`(`idDepartamento`,`nombre`) values (1,'Amazonas'),(2,'Antioquia'),(3,'Arauca'),(4,'Atlántico'),(5,'Bogotá'),(6,'Bolívar'),(7,'Boyacá'),(8,'Caldas'),(9,'Caquetá'),(10,'Casanare'),(11,'Cauca'),(12,'Cesar'),(13,'Chocó'),(14,'Córdoba'),(15,'Cundinamarca'),(16,'Guainía'),(17,'Guaviare'),(18,'Huila'),(19,'La Guajira'),(20,'Magdalena'),(21,'Meta'),(22,'Nariño'),(23,'Norte de Santander'),(24,'Putumayo'),(25,'Quindío'),(26,'Risaralda'),(27,'San Andrés y Providencia'),(28,'Santander'),(29,'Sucre'),(30,'Tolima'),(31,'Valle del Cauca'),(32,'Vaupés'),(33,'Vichada');
 
 
 /*Data for the table `Ciudad` */

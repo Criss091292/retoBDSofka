@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ProductoServiceImpl implements  ProductoService{
     private static final String SERVER = "sofka-training.cpxphmd1h1ok.us-east-1.rds.amazonaws.com";
-    private static final String DATA_BASE_NAME = "CristianAyala_Supermercado_13092021";
+    private static final String DATA_BASE_NAME = "CristianAyala_Supermercado_10092021";
     private static final String USER = "sofka_training";
     private static final String PASSWORD = "BZenX643bQHw";
     private static final MySqlOperations mySqlOperations = new MySqlOperations();
